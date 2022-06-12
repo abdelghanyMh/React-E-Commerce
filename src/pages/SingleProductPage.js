@@ -43,19 +43,19 @@ const SingleProductPage = () => {
     return <Error />
   }
 
-  const { name, price, description, stock, stars, reviews, id: sku, company, image } = product
-
+  const { name, price, description, stock, stars, reviews, id: sku, company, images } = product
+  console.log(reviews);
   return (
     <Wrapper className='section'>
       <PageHero title={name} product />
 
       <div className="section section-center page">
         <Link to="/products" className='btn'>back to products</Link>
-        <div className="products-center">
-          <ProductImages />
+        <div className="product-center">
+          <ProductImages images={images} />
           <div className="content">
             <h2>{name}</h2>
-            <Stars />
+            <Stars stars={stars} reviews={reviews} />
             <h5 className="price">{formatPrice(price)}</h5>
             <p className="desc">{description} </p>
             <p className="info">
@@ -65,7 +65,7 @@ const SingleProductPage = () => {
             <p className="info"><span>SKU:</span>{sku}</p>
             <p className="info"><span>Brand:</span>{company}</p>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart product={product} />}
           </div>
         </div>
       </div>
