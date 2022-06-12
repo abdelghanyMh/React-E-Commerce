@@ -26,11 +26,31 @@ const products_reducer = (state, action) => {
       featured_products
     }
   }
-  else if (action.type = GET_PRODUCTS_ERROR) {
+  else if (action.type === GET_PRODUCTS_ERROR) {
     return {
       ...state,
       products_loading: false,
       products_error: true
+    }
+
+  }
+  else if (action.type === GET_SINGLE_PRODUCT_BEGIN) {
+    return { ...state, single_product_loading: true }
+  }
+  else if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
+    return {
+      ...state,
+      single_product_loading: false,
+      single_product: action.payload,
+    }
+  }
+  else if (action.type === GET_SINGLE_PRODUCT_ERROR) {
+    console.log('fk2');
+
+    return {
+      ...state,
+      single_product_loading: false,
+      single_product_error: true
     }
 
   }
