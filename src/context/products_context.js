@@ -14,7 +14,11 @@ import {
 } from '../actions'
 
 const initialState = {
-  isSidebarOpen: false
+  isSidebarOpen: false,
+  products_loading: false,
+  products_error: false,
+  products: [],
+  featured_products: []
 }
 
 const ProductsContext = React.createContext()
@@ -30,6 +34,28 @@ export const ProductsProvider = ({ children }) => {
   const openSidebar = () => {
     dispatch({ type: SIDEBAR_OPEN })
   }
+
+  //  fetch products 
+  const fetchProducts = async (url) => {
+    dispatch({ type: GET_PRODUCTS_BEGIN })
+    try {
+      const response = await axios.get(url)
+      const products = await response.data
+      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products })
+
+      console.log(response);
+    } catch (error) {
+      dispatch({ type: GET_PRODUCTS_ERROR })
+    }
+
+
+
+  }
+
+  useEffect(() => {
+    fetchProducts(url)
+
+  }, [])
   return (
     <ProductsContext.Provider value={{ ...state, closeSidebar, openSidebar }}>
       {children}
