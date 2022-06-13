@@ -15,6 +15,12 @@ const filter_reducer = (state, action) => {
     // return { ..state, all_products: action.payload, filtered_Products: action.payload }
     // this wrong cuz all_products,filtered_Products will point to the same place in the memory 
   }
+  else if (action.type === SET_LISTVIEW) {
+    return { ...state, grid_view: false }
+  }
+  else if (action.type === SET_GRIDVIEW) {
+    return { ...state, grid_view: true }
+  }
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }
