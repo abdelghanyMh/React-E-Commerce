@@ -10,6 +10,11 @@ import {
 } from '../actions'
 
 const filter_reducer = (state, action) => {
+  if (action.type === LOAD_PRODUCTS) {
+    return { ...state, all_products: [...action.payload], filtered_Products: [...action.payload] }
+    // return { ..state, all_products: action.payload, filtered_Products: action.payload }
+    // this wrong cuz all_products,filtered_Products will point to the same place in the memory 
+  }
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }
