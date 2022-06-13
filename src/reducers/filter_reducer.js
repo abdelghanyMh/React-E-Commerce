@@ -11,7 +11,17 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
-    return { ...state, all_products: [...action.payload], filtered_Products: [...action.payload] }
+    let maxPrice = getMAxPrice(action);
+    return {
+      ...state,
+      all_products: [...action.payload],
+      filtered_Products: [...action.payload],
+      filters: {
+        ...state.filters,
+        max_price: maxPrice,
+        price: maxPrice
+      }
+    }
     // return { ..state, all_products: action.payload, filtered_Products: action.payload }
     // this wrong cuz all_products,filtered_Products will point to the same place in the memory 
   }
@@ -43,8 +53,29 @@ const filter_reducer = (state, action) => {
     return { ...state, filtered_Products: sortedProducts }
 
   }
+  else if (action.type == UPDATE_FILTERS) {
+    const { name, value } = action.payload
+    return { ...state, filters: { ...state.filters, [name]: value } }
+
+  }
+  else if (action.type === FILTER_PRODUCTS) {
+    return {...state}
+  }
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
+
+
 }
 
+
 export default filter_reducer
+function getMAxPrice(products) {
+  let tmp = 0;
+  for (let index = 0; index < products.payload.length; index++) {
+    if (products.payload[index].price > tmp) {
+      tmp = products.payload[index].price;
+    }
+  }
+  return tmp;
+}
+
