@@ -62,6 +62,25 @@ const cart_reducer = (state, action) => {
   else if (action.type === CLEAR_CART) {
     return { ...state, cart: [] }
   }
+  else if (action.type === TOGGLE_CART_ITEM_AMOUNT) {
+    const { id, value } = action.payload
+
+    const tempCart = state.cart.map(item => {
+      if (item.id == id) {
+
+        value === 'inc' ? ++item.amount : --item.amount
+
+        item.amount < 1 ? item.amount = 1 : item.amount = item.amount
+
+        item.amount > item.max ? item.amount = item.max : item.amount = item.amount
+
+      }
+      return item
+    })
+
+    return { ...state, tempCart }
+
+  }
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }
