@@ -8,8 +8,15 @@ import {
   COUNT_CART_TOTALS,
 } from '../actions'
 
+// get the cart value form the locale storage
+const getLocalStorage = () => {
+  const cart = localStorage.getItem('cart')
+  console.log(cart);
+  return cart ? JSON.parse(cart) : []
+}
+
 const initialState = {
-  cart: [],
+  cart: getLocalStorage(),
   total_items: 0,
   total_amount: 0,
   shipping_fee: 534
@@ -18,6 +25,8 @@ const initialState = {
 const CartContext = React.createContext()
 
 export const CartProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
 
   const AddToCart = ({ id, mainColor, amount, product }) => {
     dispatch({ type: ADD_TO_CART, payload: { id, color: mainColor, amount, product } })
@@ -25,20 +34,23 @@ export const CartProvider = ({ children }) => {
 
   // remove item 
   const removeItem = () => {
-    
+
   }
 
   // toggle amount 
   const toggleAmount = () => {
-    
+
   }
 
   // clear cart 
   const clearCart = () => {
-    
-  }
-  const [state, dispatch] = useReducer(reducer, initialState)
 
+  }
+
+  // store the cart locally on change to save item on renrender
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(state.cart))
+  }, [state.cart])
   return (
     <CartContext.Provider value={{ ...state, AddToCart, removeItem, toggleAmount, clearCart }}>{children}</CartContext.Provider>
   )

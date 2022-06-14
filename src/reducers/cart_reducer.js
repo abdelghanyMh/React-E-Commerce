@@ -8,9 +8,6 @@ import {
 
 const cart_reducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
-
-
-    console.log(action.payload);
     const { id, color, amount, product } = action.payload
     const tenpItem = state.cart.find(i => i.id === id + color)
     if (tenpItem) {
