@@ -33,7 +33,6 @@ export const CartProvider = ({ children }) => {
 
   // remove item 
   const removeItem = (id) => {
-    console.log('wtf');
     dispatch({ type: REMOVE_CART_ITEM, payload: id })
 
   }
@@ -50,8 +49,11 @@ export const CartProvider = ({ children }) => {
 
   // store the cart locally on change to save item on renrender
   useEffect(() => {
+    dispatch({ type: COUNT_CART_TOTALS })
     localStorage.setItem('cart', JSON.stringify(state.cart))
+    
   }, [state.cart])
+
   return (
     <CartContext.Provider value={{ ...state, AddToCart, removeItem, toggleAmount, clearCart }}>{children}</CartContext.Provider>
   )
