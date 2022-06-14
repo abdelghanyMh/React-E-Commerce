@@ -11,7 +11,6 @@ import {
 // get the cart value form the locale storage
 const getLocalStorage = () => {
   const cart = localStorage.getItem('cart')
-  console.log(cart);
   return cart ? JSON.parse(cart) : []
 }
 
@@ -33,18 +32,20 @@ export const CartProvider = ({ children }) => {
   }
 
   // remove item 
-  const removeItem = () => {
+  const removeItem = (id) => {
+    console.log('wtf');
+    dispatch({ type: REMOVE_CART_ITEM, payload: id })
 
   }
 
   // toggle amount 
-  const toggleAmount = () => {
+  const toggleAmount = (id, value) => {
 
   }
 
   // clear cart 
   const clearCart = () => {
-
+    dispatch({ type: CLEAR_CART })
   }
 
   // store the cart locally on change to save item on renrender
