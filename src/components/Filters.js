@@ -44,7 +44,7 @@ const Filters = () => {
                   name='category'
                   type='button'
                   onClick={updateFilters}
-                  className={`${category === c.toLowerCase() ? 'active' : null}`} > {c}</button>
+                  className={`${category === c.toLowerCase() ? 'active' : null}`} >{c}</button>
 
               })
             }
@@ -69,30 +69,41 @@ const Filters = () => {
         {/* end companies */}
 
         {/* colors */}
-        <div className="form-control">
+        <div className='form-control'>
           <h5>colors</h5>
-          <div className="colors">
-            <button name="color" data-color="all" className="all-btn">all</button>
-            {
-              colors.map((c, index) => {
-                return <button
+          <div className='colors'>
+            {colors.map((c, index) => {
+              if (c === 'all') {
+                return (
+                  <button
+                    key={index}
+                    name='color'
+                    onClick={updateFilters}
+                    data-color='all'
+                    className={`${color === 'all' ? 'all-btn active' : 'all-btn'
+                      }`}
+                  >
+                    all
+                  </button>
+                )
+              }
+              return (
+                <button
                   key={index}
                   name='color'
                   style={{ background: c }}
-                  className={`${c === color ? 'color-btn active' : 'color-btn'}`}
+                  className={`${color === c ? 'color-btn active' : 'color-btn'
+                    }`}
                   data-color={c}
                   onClick={updateFilters}
-                  type='button'
                 >
-                  {
-                    c === color ? <FaCheck /> : null
-                  }
+                  {color === c ? <FaCheck /> : null}
                 </button>
-              })
-            }
+              )
+            })}
           </div>
         </div>
-        {/* end colors */}
+        {/* end of colors */}
 
         {/* price */}
         <div className="form-control">

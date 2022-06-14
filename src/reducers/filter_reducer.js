@@ -59,7 +59,48 @@ const filter_reducer = (state, action) => {
 
   }
   else if (action.type === FILTER_PRODUCTS) {
-    return { ...state }
+    const { all_products } = state
+    const {
+      text,
+      company,
+      category,
+      color,
+      price,
+      shipping
+    } = state.filters
+    let tempProducts = all_products
+
+    // filtering
+    if (text) {
+      tempProducts = tempProducts.filter(product => product.name.toLowerCase().includes(text))
+    }
+
+    // color
+    if (color !== 'all') {
+      tempProducts = tempProducts.filter(product => product.colors.indexOf(color) !== -1)
+    }
+
+    // company
+    if (company !== 'all') {
+      tempProducts = tempProducts.filter(product => product.company === company)
+    }
+
+    //category
+    if (category !== 'all') {
+      tempProducts = tempProducts.filter(
+        (product) => product.category === category
+      )
+    }
+
+    // shipping
+    if (shipping) {
+      tempProducts = tempProducts.filter(product => product.shipping === true)
+    }
+
+    // price
+    tempProducts = tempProducts.filter(product => product.price <= price)
+
+    return { ...state, filtered_Products: tempProducts }
   }
   else if (action.type === CLEAR_FILTERS) {
     return {
@@ -80,9 +121,6 @@ const filter_reducer = (state, action) => {
 
 
 }
-
-
-export default filter_reducer
 function getMAxPrice(products) {
   let tmp = 0;
   for (let index = 0; index < products.payload.length; index++) {
@@ -92,4 +130,4 @@ function getMAxPrice(products) {
   }
   return tmp;
 }
-
+export default filter_reducer
