@@ -17,7 +17,6 @@ import {
   Private
 } from './pages'
 
-
 function App() {
   return (
     <Router>
@@ -31,7 +30,13 @@ function App() {
           <Route index element={<Products />} />
           <Route path=':id' element={<SingleProduct />} />
         </Route>
-        <Route path='checkout' element={<Checkout />} />
+        <Route path='checkout'
+          element={
+            <Private>
+              <Checkout />
+            </Private>
+          }
+        />
         <Route path='*' element={<Error />} />
       </Routes>
       <Footer />
