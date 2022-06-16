@@ -1,11 +1,14 @@
-import  Home  from "./HomePage";
-import  About  from "./AboutPage";
-import  Products  from "./ProductsPage";
-import  SingleProduct  from "./SingleProductPage";
-import  Cart  from "./CartPage";
-import  Error  from "./ErrorPage";
-import  Checkout  from "./CheckoutPage";
-import  Private  from "./PrivateRoute";
+import Home from "./HomePage";
+import About from "./AboutPage";
+import Products from "./ProductsPage";
+import SingleProduct from "./SingleProductPage";
+import Cart from "./CartPage";
+import Error from "./ErrorPage";
+import Checkout from "./CheckoutPage";
+import Private from "./PrivateRoute";
+import AuthWrapper from "./AuthWrapper";
+
+
 
 
 export {
@@ -16,5 +19,6 @@ export {
     Cart,
     Checkout,
     Error,
-    Private
+    Private,
+    AuthWrapper,
 }

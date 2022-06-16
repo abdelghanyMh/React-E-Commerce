@@ -22,7 +22,7 @@ const CartButtons = () => {
         ? <button
           className='auth-btn'
           type="button"
-          onClick={() => { logout({ returnTo: process.env.REACT_APP_AUTH0_REDIRECT_URI }) }}>
+          onClick={() => { logout({ returnTo: window.location.origin }) }}>
           Logout
           <FaUserMinus />
         </button>
