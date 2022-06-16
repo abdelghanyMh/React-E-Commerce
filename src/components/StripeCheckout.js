@@ -20,7 +20,7 @@ const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 // logic 
 const CheckoutForm = () => {
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext()
-  const { user } = useUserContext()
+  const { myUser } = useUserContext()
   const navigate = useNavigate()
 
   // STRIPE STUFF
@@ -73,13 +73,53 @@ const CheckoutForm = () => {
   }, [])
 
   const handleChange = async (event) => {
+    setDisabled(event.empty)
+    setError(event.error ? event.error.message : '')
 
   }
   const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    setProcessing(true)
+    const payload = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: elements.getElement(CardElement)
+        }
+      },
+    );
+
+    if (payload.error) {
+      setError(`Payment Failed ${payload.error.message}`)
+    } else {
+      setError(null)
+      setProcessing(false)
+      setSucceeded(true)
+
+      // optional 
+      setTimeout(() => {
+        clearCart()
+        navigate('/')
+      }, 10000);
+
+    }
 
   }
 
   return <div>
+    {
+      succeeded
+        ? <article>
+          <h4>Thank you</h4>
+          <h4>Your payment was successful</h4>
+          <h4>Redirecting to home page ...</h4>
+        </article>
+        : <article>
+          <h4>hello,{myUser && myUser.name} </h4>
+          <p>Your Total is {formatPrice(shipping_fee + total_amount)}</p>
+          <p>Test Card Number: 4242 4242 4242 4242</p>
+        </article>
+    }
     <form action="" id="paymen-form" onSubmit={handleSubmit}>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button disabled={disabled || processing || succeeded} id="submit" >
