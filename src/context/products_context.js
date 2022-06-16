@@ -70,7 +70,7 @@ export const ProductsProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProducts(url)
-
+     // eslint-disable-next-line
   }, [])
   return (
     <ProductsContext.Provider value={{ ...state, closeSidebar, openSidebar, fetchSingleProduct }}>

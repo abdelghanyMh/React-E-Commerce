@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const ProductImages = ({ images = [{ url: '' }] }) => {
-  {/*  default val (handle null val onLoad)*/ }
+
+  //  default val (handle null val onLoad)
+
   const [main, setMain] = useState(images[0])
 
   return <Wrapper>
-    <img src={main.url} alt='main image' className='main' />
+    <img src={main.url} alt='main' className='main' />
     <div className="gallery">
       {
         images.map((image, index) => {

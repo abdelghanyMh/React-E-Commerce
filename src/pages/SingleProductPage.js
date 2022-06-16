@@ -23,7 +23,10 @@ const SingleProductPage = () => {
     single_product: product,
     fetchSingleProduct } = useProductsContext()
 
-  useEffect(() => { fetchSingleProduct(`${url}${id}`) }, [id])
+  useEffect(() => {
+    fetchSingleProduct(`${url}${id}`)
+    // eslint-disable-next-line
+  }, [id])
 
   // if error redirect to home after 3 s 
   useEffect(() => {
@@ -32,7 +35,7 @@ const SingleProductPage = () => {
         navigate('/')
       }, 3000);
     }
-
+    // eslint-disable-next-line
   }, [error])
 
   if (loading) {

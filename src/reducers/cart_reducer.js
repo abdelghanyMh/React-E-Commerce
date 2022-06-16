@@ -49,10 +49,7 @@ const cart_reducer = (state, action) => {
         cart: [...state.cart, newITem]
       }
     }
-    state.cart.push({ ...action.payload })
-    state.total_items += action.payload.amount * action.payload.product.price
-    state.total_amount += action.payload.amount
-    return { ...state }
+  
   }
   else if (action.type === REMOVE_CART_ITEM) {
     const tempCart = state.cart.filter(item => item.id !== action.payload)
@@ -98,7 +95,6 @@ const cart_reducer = (state, action) => {
 
     return { ...state, total_items, total_amount }
   }
-  return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }
 

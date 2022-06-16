@@ -38,11 +38,11 @@ const AddToCart = ({ product }) => {
           colors.map((color, index) => {
             return <button
               key={index}
-              className={`${mainColor == color ? 'color-btn active' : 'color-btn'}`}
+              className={`${mainColor === color ? 'color-btn active' : 'color-btn'}`}
               style={{ background: color }}
               onClick={() => { setMainColor(color) }}
             >
-              {mainColor == color ? <FaCheck /> : null}
+              {mainColor === color ? <FaCheck /> : null}
             </button>
           }
           )
