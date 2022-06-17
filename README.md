@@ -4,6 +4,9 @@
 
 Comfy Sloth is A online store for a furniture,  made by _following_  [John Smilga](https://www.udemy.com/user/janis-smilga-3/)'s [Cours](https://www.udemy.com/course/react-tutorial-and-projects-course/)
 
+[Starter Project](https://github.com/john-smilga/react-course-comfy-sloth-starter)
+
+
 ## 🏠 [Homepage](https://react-e-commerce-abdelghanymh.netlify.app/)
 
 
