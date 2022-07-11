@@ -7,7 +7,7 @@ Comfy Sloth is A online store for a furniture,  made by _following_  [John Smilg
 built in  [reactjs](https://reactjs.org/)
 I'm also using:
 1. [auth0](https://auth0.com/) to manage authentication,
-2. [stripe-payments](https://pugjs.org/api/getting-started.html) to create reusable templates for quickly building the front end,
+2. [stripe-payments](https://stripe.com/)for  online payment processing .
 4. [styled component](https://styled-components.com/)  for styling.
 5. this [Starter Project](https://github.com/john-smilga/react-course-comfy-sloth-starter)
 
