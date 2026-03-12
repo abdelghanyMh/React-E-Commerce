@@ -2,6 +2,9 @@
   "name": "store",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+  "node": "18.x"
+},
   "dependencies": {
     "@auth0/auth0-react": "^1.2.0",
     "@stripe/react-stripe-js": "^1.1.2",
